@@ -1,6 +1,6 @@
 (ns clojure-exercise.file-io)
 
-(def file-origin "resources/large.txt")
+(def file-origin "resources/walls-input.txt")
 (def file-destiny "resources/chocolate-output.txt")
 
 (defn str-input->units-int-vec
@@ -16,7 +16,9 @@
 (def walls (with-open [rdr (clojure.java.io/reader file-origin)]
                  (vec (line-seq rdr))))
 
+(def walls-int-vec (txt-vec->int-vec walls))
+
 (defn print-chocolate
   "Prints chocolate on screen and record on file-destiny.txt"
   [instant chocolate-amount]
-  (spit file-destiny (print-str "Instante" instant "contém" chocolate-amount "unidades de chocolate. \n") :append true))
+  (spit file-destiny (println-str "Instante" instant "contém" chocolate-amount "unidades de chocolate.") :append true))
