@@ -20,9 +20,9 @@
 (defn -main
   []
   (loop [instant 1
-         head (first walls-int-vec)
-         tail (rest walls-int-vec)]
+         head (conj [] (first walls-int-vec))
+         tail (vec (rest walls-int-vec))]
     (if (first tail)
       (do (print-chocolate instant (chocolate-count head))
-        (recur (inc instant) (vec (concat head (first tail))) (rest tail)))
+        (recur (inc instant) (conj head (first tail)) (rest tail)))
       (print-chocolate instant (chocolate-count head)))))
