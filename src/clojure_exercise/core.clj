@@ -2,12 +2,13 @@
   (:require [clojure.java.io :as io])
   (:gen-class))
 
-(def file-origin "resources/medium.txt")
+(def file-origin "resources/large.txt")
 
-(defn print-chocolate
-  "Prints the amount of chocolate in a instant on screen"
-  [instant chocolate-amount]
-  (println (str "Instante " instant " contém " chocolate-amount " unidades de chocolate.")))
+(def walls (with-open [rdr (io/reader file-origin)]
+             (reduce
+               #(conj %1 (Integer/parseInt %2))
+               []
+               (line-seq rdr))))
 
 (defn chocolate-at-position
   "Returns how much solid chocolate are in one specific wall"
@@ -26,11 +27,4 @@
 
 (defn -main
   []
-  (with-open [rdr (io/reader file-origin)]
-    (reduce
-      (fn [previous-walls new-wall]
-        (let [walls (conj previous-walls (Integer/parseInt new-wall))]
-          (print-chocolate (count walls) (chocolate-count walls))
-          walls))
-      []
-      (line-seq rdr))))
+  (print (chocolate-count walls)))
