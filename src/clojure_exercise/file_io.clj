@@ -1,6 +1,6 @@
 (ns clojure-exercise.file-io)
 
-(def file-origin "resources/medium.txt")
+(def file-origin "resources/walls-input.txt")
 (def file-destiny "resources/chocolate-output.txt")
 
 (defn txt-vec->int-vec
