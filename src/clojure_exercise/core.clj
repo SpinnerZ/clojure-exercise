@@ -1,6 +1,13 @@
 (ns clojure-exercise.core
-  (:require [clojure-exercise.file-io :refer :all])
+  (:require [clojure.java.io :as io])
   (:gen-class))
+
+(def file-origin "resources/medium.txt")
+
+(defn print-chocolate
+  "Prints the amount of chocolate in a instant on screen"
+  [instant chocolate-amount]
+  (println (str "Instante " instant " contém " chocolate-amount " unidades de chocolate.")))
 
 (defn chocolate-at-position
   "Returns how much solid chocolate are in one specific wall"
@@ -19,10 +26,11 @@
 
 (defn -main
   []
-  (loop [instant 1
-         head (conj [] (first walls-int-vec))
-         tail (vec (rest walls-int-vec))]
-    (if (first tail)
-      (do (print-chocolate instant (chocolate-count head))
-        (recur (inc instant) (conj head (first tail)) (rest tail)))
-      (print-chocolate instant (chocolate-count head)))))
+  (with-open [rdr (io/reader file-origin)]
+    (reduce
+      (fn [previous-walls new-wall]
+        (let [walls (conj previous-walls (Integer/parseInt new-wall))]
+          (print-chocolate (count walls) (chocolate-count walls))
+          walls))
+      []
+      (line-seq rdr))))
