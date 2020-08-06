@@ -44,9 +44,13 @@
        (fact "It should pass the only vector arity"
              (nth (walls-instant small) (position-max-right (walls-instant small))) => (apply max (walls-instant small))
              (nth (walls-instant medium) (position-max-right (walls-instant medium))) => (apply max (walls-instant medium))
-             (nth (walls-instant large) (position-max-right (walls-instant large))) => (apply max (walls-instant large)))
+             (nth (walls-instant large) (position-max-right (walls-instant large))) => (apply max (walls-instant large))
+             (position-max-right (take 4 example)) => 1)
 
        (fact "It should pass the any position arity"
+             (position-max-right (take 4 example) 1 1) => 1
+             (position-max-right (take 4 example) 2 1) => 3
+             (position-max-right (take 4 example) 3 3) => 3
              (nth (walls-instant small) (position-max-right (walls-instant small) 7 8)) => 8
              (nth (walls-instant small) (position-max-right (walls-instant small) 8 8)) => 8
              (nth (walls-instant small) (position-max-right (walls-instant small) 9 8)) => 2
