@@ -28,8 +28,7 @@
 
 (defn chocolate-count
   "Count how many solid chocolate are there in the input vector of walls"
-  ([walls]
-   (chocolate-count walls (count walls) 0 (first walls) (position-max-right walls) 0))
+  ([walls] (chocolate-count walls (count walls) 0 (first walls) (position-max-right walls) 0))
   ([walls length position left-value right-position chocolate]
    (if (> length (inc position))
      (recur walls
