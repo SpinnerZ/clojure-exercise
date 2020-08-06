@@ -17,7 +17,7 @@
 
 (defn position-max-right
   "Returns the position of the biggest value after the position input"
-  ([walls] (.indexOf walls (apply max (rest walls))))
+  ([walls] (.indexOf walls (apply max walls)))
   ([walls position previous-biggest-value-position]
    (if (< position previous-biggest-value-position)
      previous-biggest-value-position
@@ -32,8 +32,9 @@
 
 (defn chocolate-count
   "Count how many solid chocolate are there in the input vector of walls"
-  ([walls] chocolate-count walls-instant (count walls) 0 (first walls) (position-max-right walls) 0)
+  ([walls] (chocolate-count walls-instant (count walls) 0 (first walls) (position-max-right walls) 0))
   ([walls length position left-value right-position chocolate]
+   (println chocolate)
    (if (> length (inc position))
      (recur walls
             length
@@ -48,5 +49,5 @@
      chocolate)))
 
 (defn -main
-  []
-  (time (println (chocolate-count (walls-instant medium)))))
+  [walls]
+  (println (chocolate-count (walls-instant walls))))
