@@ -2,30 +2,51 @@
   (:require [clojure.java.io :as io])
   (:gen-class))
 
-(def file-origin "resources/medium.txt")
+(def small "resources/small.txt")
+(def medium "resources/medium.txt")
+(def large "resources/large.txt")
 
-(def walls (with-open [rdr (io/reader file-origin)]
+(defn walls-instant
+  "Returns a int vector of numbers from txt-input"
+  [file-origin]
+  (with-open [rdr (io/reader file-origin)]
              (reduce
                #(conj %1 (Integer/parseInt %2))
                []
                (line-seq rdr))))
 
-(def walls-length (count walls))
+(defn position-max-right
+  "Returns the position of the biggest value after the position input"
+  ([walls] (.indexOf walls (apply max (rest walls))))
+  ([walls position previous-biggest-value-position]
+   (if (< position previous-biggest-value-position)
+     previous-biggest-value-position
+     (+ position
+        (position-max-right (subvec walls position))))))
 
-(defn chocolate-at-position
+(defn chocolate-calculator
   "Returns how much solid chocolate are in one specific wall"
-  [position]
-  (- (min (apply max (take (inc position) walls))
-          (apply max (nthnext walls position)))
-     (nth walls position)))
+  [position-value left-biggest-value right-biggest-value]
+  (- (min left-biggest-value right-biggest-value)
+     position-value))
 
 (defn chocolate-count
   "Count how many solid chocolate are there in the input vector of walls"
-  ([position chocolate]
-   (if (> walls-length (inc position))
-     (recur (inc position) (+ chocolate (chocolate-at-position position)))
+  ([walls] chocolate-count walls-instant (count walls) 0 (first walls) (position-max-right walls) 0)
+  ([walls length position left-value right-position chocolate]
+   (if (> length (inc position))
+     (recur walls
+            length
+            (inc position)
+            (max left-value (nth walls (inc position)))
+            (max right-position )
+            (+ chocolate
+               (chocolate-calculator
+                 (nth walls position)
+                 left-value
+                 (nth walls right-position))))
      chocolate)))
 
 (defn -main
   []
-  (time (print (chocolate-count 0 0))))
+  (time (println (chocolate-count (walls-instant medium)))))
