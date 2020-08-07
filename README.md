@@ -62,4 +62,4 @@ or, inside REPL:
 
 (use 'midje.repl)
 
-(autorest)
+(autotest)
