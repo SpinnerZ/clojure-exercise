@@ -64,4 +64,4 @@ The program uses [midje](https://github.com/marick/Midje) for tests.
 
 1. `(use 'midje.repl)`
 
-2. `(autorest)`
+2. `(autotest)`
