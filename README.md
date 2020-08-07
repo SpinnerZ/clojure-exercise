@@ -2,28 +2,30 @@
 
 A Clojure skill test.
 
+The problem description in portuguese is in [/doc/intro.txt](https://github.com/SpinnerZ/clojure-exercise/blob/master/doc/intro.txt).
+
 ## Usage
 
 ### To set the input:
 Put the files with the wall heights in **/resources**.
 
 ### To run:
-Just do **lein run FILE_PATH** in the project root folder. You will need the Leiningen installed.
+- Just do `lein run FILE_PATH` in the project root folder. You will need the [Leiningen](https://leiningen.org/) installed.
 
 Example:
 
-lein run resources/large.txt
+`lein run resources/large.txt`
 
 OR
 
-Execute **(-main FILE_PATH)** inside the **repl** environment.
+- Execute `(-main FILE_PATH)` inside the **repl** environment.
 There are presets for small, medium and large .txt files inside the resources folder. So, it's possible to do:
 
-(-main small)
+- `(-main small)`
 
-(-main medium)
+- `(-main medium)`
 
-(-main large)
+- `(-main large)`
 
 ### Output:
 The total amount of chocolate will be printed in the console.
@@ -54,12 +56,12 @@ It controls each iteration and calls all other expressions in the program.
 First, it initializes the values only requiring the vector of all walls heights. Then, until the end of the vector, for each iteration, it stores the actual wall being used to calculate the amount of chocolate, the left biggest wall, the position of the right biggest wall and stores the chocolate sum.
 
 ## Tests
-The program uses **midje** for tests.
+The program uses [midje](https://github.com/marick/Midje) for tests.
 
-To run then, just do **lein midje** on root folder
+- To run then, just do `lein midje` on root folder
 
-or, inside REPL:
+- or, inside REPL:
 
-(use 'midje.repl)
+1. `(use 'midje.repl)`
 
-(autorest)
+2. `(autorest)`

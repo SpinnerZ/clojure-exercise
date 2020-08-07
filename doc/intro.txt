@@ -1,0 +1,34 @@
+Uma fábrica de chocolate está experimentando um novo processo de produção de barras de chocolate, que consiste em derramar chocolate quente continuamente sobre paredes frias que se movem em cima de uma esteira. O chocolate é então solidificado, criando formatos diferentes para as barras. O excesso de chocolate é então capturado para ser usado em novas paredes.
+
+Implemente um programa que receba as alturas das paredes à medida que são formadas, e calcule a quantidade de chocolate sólido até o momento. Tenha em mente que o programa rodará continuamente (tem um início determinado, mas não um final), e gostaríamos de consultar o estado do programa a qualquer momento, para verificar a quantidade atual de chocolate sólido.
+
+#####  Exemplo:
+@ = unidade de líquido
+|*| = parede
+
+instante = t1:
+Sequência de paredes: [0 2 0 1]
+     _
+ _  | |
+| |@| |_
+ 1 0 2 0
+Contém uma unidade de chocolate
+
+instante = t2 (t1 após receber uma parede de altura 2):
+ _     _
+| |@ @| |
+| |*|@| |_
+ 2 1 0 2 0
+Contém três unidades de chocolate
+
+instante = t3 (t2 após receber esta sequência de alturas: 0, 1, 0, 3, 0:
+  _
+ | |      _     _
+ | |@ @ @| |@ @| |
+_| |@|*|@| |*|@| |_
+0 3 0 1 0 2 1 0 2 0
+Contém oito unidades de chocolate
+
+#####  O que pedimos:
+
+Implemente a calculadora que lê um arquivo contendo uma sequência de paredes, e imprime na tela a quantidade atual de chocolate sólido. Providenciamos exemplos de sequências pequenas, médias e grandes.
